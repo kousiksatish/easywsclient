@@ -35,6 +35,7 @@ class WebSocket {
     virtual void sendPing() = 0;
     virtual void close() = 0;
     virtual readyStateValues getReadyState() const = 0;
+    virtual size_t getBufferedAmount() const = 0;
 
     template<class Callable>
     void dispatch(Callable callable)

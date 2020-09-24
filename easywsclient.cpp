@@ -120,6 +120,7 @@ class _DummyWebSocket : public easywsclient::WebSocket
     void sendPing() { }
     void close() { } 
     readyStateValues getReadyState() const { return CLOSED; }
+    size_t getBufferedAmount() const { return 0; }
     void _dispatch(Callback_Imp & callable) { }
     void _dispatchBinary(BytesCallback_Imp& callable) { }
 };
@@ -183,6 +184,10 @@ class _RealWebSocket : public easywsclient::WebSocket
 
     readyStateValues getReadyState() const {
       return readyState;
+    }
+
+    size_t getBufferedAmount() const {
+        return txbuf.size();
     }
 
     void poll(int timeout) { // timeout in milliseconds
